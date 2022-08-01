@@ -1,6 +1,8 @@
 <script>
     import NoteButton from "./NoteButton.svelte";
     import { createEventDispatcher } from 'svelte';
+    import { fade } from 'svelte/transition';
+    import { sineInOut } from 'svelte/easing';
     import { darkmode } from '../store/store.js';
 
     export let id, title, color, text, collectionId, user;
@@ -31,7 +33,10 @@
     }
 </script>
 
-<div class="note { $darkmode ? 'note-dark' : '' }">
+<div class="note { $darkmode ? 'note-dark' : '' }"
+in:fade="{{ delay: 100, duration: 300 }}"
+out:fade="{{ delay: 100, duration: 400, easing: sineInOut }}"
+>
     <div class="note-container" style={ $darkmode ? 'background-color: #232531' : 'background-color: ' + color }>
         <section class="header" style={ 'background-color: ' + color }>
             <article class="options">

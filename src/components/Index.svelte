@@ -2,17 +2,22 @@
     // @ts-nocheck
     import Header from '../components/Header.svelte';
     import Dashboard from '../components/Dashboard.svelte';
+    import Loading from './Loading.svelte';
     import { onMount } from 'svelte';
     import { darkmode, user } from '../store/store.js';
     import { getData, newNote, updateNote, removeNote } from '../firebase/endpoints';
     import { v4 } from 'uuid';
 
+    let loading = true;
     let notes = [];
     let copyNotes = [ ...notes ];
     $: count = notes.length;
 
     onMount(async () => {
+        loading = true;
         const data = await getData();
+        loading = false;
+
         notes = [ ...data.notes ];
         copyNotes = [ ...notes ];
         darkmode.apply(data.settings.darkmode);
@@ -92,15 +97,19 @@
 <main class={ $darkmode ? 'darkmode' : '' }>
     <Header on:input={ handleSearch }/>
     
-    <div class="count-notes">
-        { count } Nota{ count === 1 ? '' : 's' }
-    </div>
-    
-    <Dashboard bind:notes={ copyNotes } 
-    on:click={ handleNew } 
-    on:update={ handleUpdate }
-    on:color={ handleColor }
-    on:remove={ handleRemove }/>
+    {#if loading}
+       <Loading/>
+    {:else}
+        <div class="count-notes">
+            { count } Nota{ count === 1 ? '' : 's' }
+        </div>
+        
+        <Dashboard bind:notes={ copyNotes } 
+        on:click={ handleNew } 
+        on:update={ handleUpdate }
+        on:color={ handleColor }
+        on:remove={ handleRemove }/>
+    {/if}
 </main>
 
 <style>
