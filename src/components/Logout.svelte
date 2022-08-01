@@ -12,6 +12,7 @@
             $isLoggedIn = false;
 
             navigate("/login", { replace: true });
+            location.reload();
         } catch(error) {
             console.error(error);
         }

@@ -1,8 +1,9 @@
 <script>
+    // @ts-nocheck
     import Header from '../components/Header.svelte';
     import Dashboard from '../components/Dashboard.svelte';
     import { onMount } from 'svelte';
-    import { darkmode } from '../store/store.js';
+    import { darkmode, user } from '../store/store.js';
     import { getData, newNote, updateNote, removeNote } from '../firebase/endpoints';
     import { v4 } from 'uuid';
 
@@ -20,7 +21,7 @@
     async function handleNew() {
         const color = generateColor();
         const id = v4();
-        const note = { id: id, title: '', color: color, text: '' };
+        const note = { id: id, title: '', color: color, text: '', user: $user.email };
 
         let colId = await newNote(note);
 

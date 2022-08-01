@@ -1,12 +1,17 @@
+// @ts-nocheck
 import { collection, getDocs, addDoc, updateDoc, deleteDoc, doc } from "firebase/firestore";
 import { db } from "./firebase";
-import { darkmode } from '../store/store';
+import { darkmode, user } from '../store/store';
 
 export const getData = async () => {
-    let theme;
+    let theme, email;
 
     darkmode.subscribe(value => {
         theme = value;
+    });
+
+    user.subscribe(value => {
+        email = value.email;
     });
 
     const data = {
@@ -19,7 +24,9 @@ export const getData = async () => {
     const querySnapshot = await getDocs(collection(db, "notes"));
 
     querySnapshot.forEach(doc => {
-        data.notes.push({ ...doc.data(), collectionId: doc.id });
+        if (doc.data().user === email) {
+            data.notes.push({ ...doc.data(), collectionId: doc.id });
+        }
     });
 
     return { ...data };
