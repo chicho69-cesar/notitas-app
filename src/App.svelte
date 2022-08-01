@@ -3,7 +3,7 @@
     import Dashboard from './components/Dashboard.svelte';
     import { onMount } from 'svelte';
     import { darkmode } from './store/store.js';
-    import { getData, newNote, updateNote, removeNote } from './api/endpoints';
+    import { getData, newNote, updateNote, removeNote } from './firebase/endpoints';
     import { v4 } from 'uuid';
 
     let notes = [];
@@ -14,15 +14,17 @@
         const data = await getData();
         notes = [ ...data.notes ];
         copyNotes = [ ...notes ];
-        darkmode.set(data.settings.darkmode);
+        darkmode.apply(data.settings.darkmode);
     });
 
-    function handleNew() {
+    async function handleNew() {
         const color = generateColor();
         const id = v4();
         const note = { id: id, title: '', color: color, text: '' };
 
-        newNote(note);
+        let colId = await newNote(note);
+
+        note.collectionId = colId;
 
         notes = [ note, ...notes ];
         copyNotes = [ ...notes ];
@@ -77,7 +79,7 @@
 
     function generateColor() {
         const colors = [
-            '#DDFFC2', '#FFC2C2', '#FFEAC2', '#C2FFD3', '#C2FFEC', '#f13157',
+            '#DDFFC2', '#FFC2C2', '#FFEAC2', '#C2FFD3', '#C2FFEC', '#F13157',
             '#C2FAFF', '#C2E2FF', '#CBC2FF', '#EBC2FF', '#FFC2F7', '#FFC2D8'
         ];
 		const index = Math.floor(Math.random() * (colors.length));

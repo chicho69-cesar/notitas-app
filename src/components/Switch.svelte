@@ -1,9 +1,9 @@
 <script>
     import { darkmode } from '../store/store.js';
-    import { darkTheme } from '../api/endpoints';
+    import { darkTheme } from '../firebase/endpoints';
 
     function changeTheme() {
-        darkmode.update(theme => !$darkmode);
+        darkmode.change();
         darkTheme($darkmode);
     }
 </script>

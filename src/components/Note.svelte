@@ -3,7 +3,7 @@
     import { createEventDispatcher } from 'svelte';
     import { darkmode } from '../store/store.js';
 
-    export let id, title, color, text;
+    export let id, title, color, text, collectionId;
 
     const dispatch = createEventDispatcher();
 
@@ -12,7 +12,8 @@
             id: id,
             text: text,
             color: color,
-            title: title
+            title: title,
+            collectionId: collectionId
         });
     }
     
