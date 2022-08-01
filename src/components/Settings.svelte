@@ -9,6 +9,9 @@
 <style>
     .settings {
         display: flex;
+        flex-flow: row nowrap;
+        gap: 0.25rem;
+        justify-content: flex-end;
         align-items: center;
     }
 </style>

@@ -24,3 +24,5 @@ const setTheme = () => {
 }
 
 export const darkmode = setTheme();
+export const user = writable({});
+export const isLoggedIn = writable(false);
