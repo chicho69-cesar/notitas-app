@@ -4,7 +4,7 @@
     import Dashboard from '../components/Dashboard.svelte';
     import Loading from './Loading.svelte';
     import { onMount } from 'svelte';
-    import { darkmode, user } from '../store/store.js';
+    import { darkmode, user, isLoggedIn } from '../store/store.js';
     import { getData, newNote, updateNote, removeNote } from '../firebase/endpoints';
     import { v4 } from 'uuid';
 
@@ -14,13 +14,15 @@
     $: count = notes.length;
 
     onMount(async () => {
-        loading = true;
-        const data = await getData();
-        loading = false;
+        if ($user && $isLoggedIn) {
+            loading = true;
+            const data = await getData();
+            loading = false;
 
-        notes = [ ...data.notes ];
-        copyNotes = [ ...notes ];
-        darkmode.apply(data.settings.darkmode);
+            notes = [ ...data.notes ];
+            copyNotes = [ ...notes ];
+            darkmode.apply(data.settings.darkmode);
+        }
     });
 
     async function handleNew() {
@@ -93,6 +95,10 @@
 		return colors[index];
     }
 </script>
+
+<svelte:head>
+    <title>Notitas App</title>
+</svelte:head>
 
 <main class={ $darkmode ? 'darkmode' : '' }>
     <Header on:input={ handleSearch }/>

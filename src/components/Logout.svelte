@@ -11,8 +11,8 @@
             $user = {};
             $isLoggedIn = false;
 
-            navigate("/login", { replace: true });
             location.reload();
+            navigate("/login", { replace: true });
         } catch(error) {
             console.error(error);
         }

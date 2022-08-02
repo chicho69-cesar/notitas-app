@@ -20,4 +20,22 @@
         text-align: center;
         font-size: 1.25rem;
     }
+
+    @media screen and (max-width: 1096px) {
+        input {
+            width: 400px;
+        }
+    }
+
+    @media screen and (max-width: 900px) {
+        input {
+            width: 300px;
+        }
+    }
+
+    @media screen and (max-width: 600px) {
+        input {
+            width: 250px;
+        }
+    }
 </style>

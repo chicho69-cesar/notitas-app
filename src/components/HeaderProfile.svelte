@@ -20,4 +20,24 @@
         object-fit: cover;
         object-position: center;
     }
+
+    @media screen and (max-width: 1096px) {
+        .img-profile {
+            width: 35px;
+            height: 35px;
+        }
+    }
+
+    @media screen and (max-width: 900px) {
+        .img-profile {
+            width: 30px;
+            height: 30px;
+        }
+    }
+
+    @media screen and (max-width: 600px) {
+        .img-profile {
+            display: none;
+        }
+    }
 </style>

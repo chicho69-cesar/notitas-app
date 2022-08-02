@@ -1,4 +1,5 @@
 <script>
+    import { onMount } from 'svelte/internal';
     import { auth } from '../firebase/firebase.js';
     import { signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } from 'firebase/auth';
     import { user, isLoggedIn, darkmode } from '../store/store.js';
@@ -31,6 +32,11 @@
             console.error(error);
         }
     }
+
+    onMount(() => {
+        $user = {};
+        $isLoggedIn = false;
+    });
 </script>
 
 <svelte:head>

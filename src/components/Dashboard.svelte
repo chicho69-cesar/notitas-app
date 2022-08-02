@@ -31,4 +31,22 @@
         width: 100%;
         gap: 0.5rem;
     }
+
+    @media screen and (max-width: 1096px) {
+        .notes-container {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    @media screen and (max-width: 900px) {
+        .notes-container {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media screen and (max-width: 600px) {
+        .notes-container {
+            grid-template-columns: repeat(1, 1fr);
+        }
+    }
 </style>
