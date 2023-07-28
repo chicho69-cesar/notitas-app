@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy": "gh-pages -d dist"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "2.4.3",
@@ -14,6 +15,7 @@
     "vite": "4.4.7"
   },
   "dependencies": {
+    "gh-pages": "^5.0.0",
     "normalize.css": "8.0.1",
     "svelte-routing": "2.0.0",
     "uuid": "9.0.0"
