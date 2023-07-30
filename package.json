@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "gh-pages": "^5.0.0",
+    "just-debounce-it": "3.2.0",
     "normalize.css": "8.0.1",
     "svelte-routing": "2.0.0",
     "uuid": "9.0.0"

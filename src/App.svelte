@@ -1,6 +1,7 @@
 <script>
   import { onMount } from 'svelte'
   import { v4 as uuidv4 } from 'uuid'
+  import debounce from 'just-debounce-it'
 
   import Dashboard from './lib/components/Dashboard.svelte'
   import Header from './lib/components/Header.svelte'
@@ -33,8 +34,8 @@
     copyNotes = [...notes]
   }
 
-  const handleUpdate = (/** @type {any} */ e) => {
-    const note = e.detail
+  const handleUpdate = (/** @type {any} */ event) => {
+    const note = event.detail
     const index = notes.findIndex(n => n.id === note.id)
     
     updateNote(note)
@@ -43,25 +44,25 @@
     copyNotes = [...notes]
   }
 
-  const handleColor = (/** @type {any} */ e) => {
-    const index = notes.findIndex(n => n.id === e.detail.id)
+  const handleColor = (/** @type {any} */ event) => {
+    const index = notes.findIndex(n => n.id === event.detail.id)
     notes[index].color = generateColor()
     copyNotes[index].color = notes[index].color
 
     updateNote(notes[index])
   }
 
-  const handleRemove = (/** @type {any} */ e) => {
-    const response = notes.filter(n => n.id !== e.detail.id)
+  const handleRemove = (/** @type {any} */ event) => {
+    const response = notes.filter(n => n.id !== event.detail.id)
     
-    removeNote(e.detail.id)
+    removeNote(event.detail.id)
     
     notes = [...response]
     copyNotes = [...notes]
   }
 
-  const handleSearch = (/** @type {any} */ e) => {
-    let query = e.target.value
+  const handleSearch = (/** @type {any} */ event) => {
+    let query = event.target.value
     query = query.trim()
     query = query.toLowerCase()
 
@@ -79,10 +80,17 @@
 
     copyNotes = [...results]
   }
+
+  const debounceGetNotes = debounce((/** @type {any} */ event) => {
+    console.log(event.target.value)
+    handleSearch(event)
+  }, 300)
 </script>
 
 <main class={$darkmode ? 'darkmode' : ''}>
-  <Header on:input={handleSearch}/>
+  <Header 
+    on:input={debounceGetNotes}
+  />
   
   <div class="count-notes">
     {count} Nota{count === 1 ? '' : 's'}

@@ -4,6 +4,9 @@ dependencies:
   gh-pages:
     specifier: ^5.0.0
     version: 5.0.0
+  just-debounce-it:
+    specifier: 3.2.0
+    version: 3.2.0
   normalize.css:
     specifier: 8.0.1
     version: 8.0.1
@@ -562,6 +565,10 @@ packages:
     resolution: {integrity: sha512-m6F1R3z8jjlf2imQHS2Qez5sjKWQzbuuhuJ/FKYFRZvPE3PuHcSMVZzfsLhGVOkfd20obL5SWEBew5ShlquNxg==}
     optionalDependencies:
       graceful-fs: 4.2.11
+    dev: false
+
+  /just-debounce-it@3.2.0:
+    resolution: {integrity: sha512-WXzwLL0745uNuedrCsCs3rpmfD6DBaf7uuVwaq98/8dafURfgQaBsSpjiPp5+CW6Vjltwy9cOGI6qE71b3T8iQ==}
     dev: false
 
   /kleur@4.1.5:
